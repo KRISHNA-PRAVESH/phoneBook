@@ -1,10 +1,13 @@
 console.clear()
+
+//Picking elements in the HTML
 const inputContainerEl = document.querySelector(".input-container");
 const textInputEl = document.querySelector("input#text");
 const suggestionEl = document.querySelector(".suggestion-container");
-const svgTabIcon = document.querySelector(".icon.tab-key");
-const svgEnterIcon = document.querySelector(".icon.enter-key");
+// const svgTabIcon = document.querySelector(".icon.tab-key");
+// const svgEnterIcon = document.querySelector(".icon.enter-key");
 
+//Ascii values
 const ENTER_KEYCODE = 13;
 const TAB_KEYCODE = 9;
 const BACKSPACE_KEYCODE = 8;
@@ -12,6 +15,7 @@ const UP_ARROW_KEYCODE = 38;
 const DOWN_ARROW_KEYCODE = 40;
 const SPACE_KEYCODE = 32;
 
+//Contains words to be suggested
 let wordsArray = [
 	"html",
 	"css",
@@ -28,6 +32,7 @@ let wordsArray = [
 	"php",
 	"yii",
 	"laravel",
+    "lava",
 	"codigniter",
 	"mysql",
 	"mongo db",
@@ -93,14 +98,17 @@ textInputEl.addEventListener("input", e => {
 	if (inputValue.length == 0 || inputValue == suggestedWord) {
 		svgTabIcon.classList.add("hidden");
 		svgEnterIcon.classList.add("hidden");
-	}
+	}   
 
 	if (textInputEl.value.length == 0) {
 		insertText = false;
 	}
 });
 
+//When the user started entering a character
 textInputEl.addEventListener("keydown", e => {
+
+    //if the user presses ENTER then all the typed character will erased
 	if (e.keyCode == ENTER_KEYCODE) {
 		if (textInputEl.value.length == 0) return;
 		let inputValue = textInputEl.value;
@@ -119,18 +127,23 @@ textInputEl.addEventListener("keydown", e => {
 		removeClassAfterAnimationCompletes(inputContainerEl, "animate");
 	}
 
+    
 	if (textInputEl.value.length != 0) {
+
+        //If Arrow-up is pressed then go up in the lis of all related words
 		if (e.keyCode == UP_ARROW_KEYCODE) {
 			if (currentWordIndex == 0) return;
 			currentWordIndex--;
 			suggestionEl.innerHTML = suggestedWordsArray[currentWordIndex];
 		}
-
+ 
+        //If arrow-down is pressed go down in the list of all related words
 		if (e.keyCode == DOWN_ARROW_KEYCODE) {
 			if (currentWordIndex == suggestedWordsArray.length - 1) return;
 			currentWordIndex++;
 			suggestionEl.innerHTML = suggestedWordsArray[currentWordIndex];
 		}
+        
 
 		if (e.keyCode == BACKSPACE_KEYCODE) {
 			currentWordIndex = 0;
@@ -138,7 +151,9 @@ textInputEl.addEventListener("keydown", e => {
 	}
 
 	if (suggestedWord != undefined && suggestedWord != "") {
-		if (e.keyCode == TAB_KEYCODE) {
+        
+		//if the user presses tab then fill the box with the currently suggested word
+        if (e.keyCode == TAB_KEYCODE) {
 			e.preventDefault();
 			textInputEl.value = suggestedWordsArray[currentWordIndex];
 			suggestionEl.innerHTML = "";
@@ -157,6 +172,8 @@ function removeClassAfterAnimationCompletes(el, className) {
 	}, +elStyles.animationDuration.replace("s", "") * 1000);
 }
 
+
+//Filtering suggestions based on input 
 function filterArray(array, item, reverse = false) {
 	if (reverse) {
 		return array
