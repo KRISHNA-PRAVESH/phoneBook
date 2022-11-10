@@ -15,5 +15,4 @@ function search(){
     if(num==undefined) alert('Not found');
     else alert(`Name: ${name}, Number: ${contact.get(name)}`);
     
-    
 }
