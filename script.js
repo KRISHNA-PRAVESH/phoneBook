@@ -4,8 +4,7 @@ console.clear()
 const inputContainerEl = document.querySelector(".input-container");
 const textInputEl = document.querySelector("input#text");
 const suggestionEl = document.querySelector(".suggestion-container");
-// const svgTabIcon = document.querySelector(".icon.tab-key");
-// const svgEnterIcon = document.querySelector(".icon.enter-key");
+
 
 //Ascii values
 const ENTER_KEYCODE = 13;
@@ -15,57 +14,16 @@ const UP_ARROW_KEYCODE = 38;
 const DOWN_ARROW_KEYCODE = 40;
 const SPACE_KEYCODE = 32;
 
-//Contains words to be suggested
-let wordsArray = [
-	"html",
-	"css",
-	"javascript",
-	"jquery",
-	"ajax",
-	"react",
-	"angular",
-	"node js",
-	"express js",
-	"redux",
-	"chart js",
-	"bootstrap",
-	"php",
-	"yii",
-	"laravel",
-    "lava",
-	"codigniter",
-	"mysql",
-	"mongo db",
-	"asp .net",
-	"java",
-	"python",
-	"django",
-	"ruby",
-	"c++",
-	"webpack",
-	"hammer js",
-	"http",
-	"server",
-	"programming",
-	"artificial inteligence",
-	"development",
-	"website",
-	"app",
-	"frontend",
-	"backend",
-	"cross platform",
-	"xml",
-	"api",
-	"algorithm",
-	"ssl",
-	"enrypt",
-	"decrypt",
-	"code",
-];
+
+
+//contains all the contact names
+let wordsArray = [];
+
 let suggestedWord = "";
 let suggestedWordsArray = [];
 let currentWordIndex = 0;
 let insertText = false;
+
 
 textInputEl.addEventListener("input", e => {
 	if (e.data != " ") {
@@ -86,19 +44,7 @@ textInputEl.addEventListener("input", e => {
 	if (inputValue.length == 0 || suggestedWordsArray.length == 0) {
 		suggestionEl.innerHTML = "";
 	}
-
-	if (suggestedWordsArray.length != 0) {
-		svgTabIcon.classList.remove("hidden");
-		svgEnterIcon.classList.add("hidden");
-	} else {
-		svgTabIcon.classList.add("hidden");
-		svgEnterIcon.classList.remove("hidden");
-	}
-
-	if (inputValue.length == 0 || inputValue == suggestedWord) {
-		svgTabIcon.classList.add("hidden");
-		svgEnterIcon.classList.add("hidden");
-	}   
+ 
 
 	if (textInputEl.value.length == 0) {
 		insertText = false;
@@ -151,7 +97,7 @@ textInputEl.addEventListener("keydown", e => {
 	}
 
 	if (suggestedWord != undefined && suggestedWord != "") {
-        
+
 		//if the user presses tab then fill the box with the currently suggested word
         if (e.keyCode == TAB_KEYCODE) {
 			e.preventDefault();
@@ -194,3 +140,37 @@ function compareTwoStrings(string, subString) {
 	let temp = string.split("", subString.length).join("");
 	if (subString == temp) return subString;
 }
+
+
+
+//Add contacts into the map also into the suggestions array
+const contacts = new Map();
+function addContact(){
+    let name = prompt("Enter name");
+    let number = prompt("Enter Number");
+    contacts.set(name,number);
+
+    //adding name to the suggestions
+    wordsArray.push(name);
+
+    console.log(wordsArray)
+}
+
+//Printing the number of selected person if exists
+function Get(){
+    let toGet = document.getElementById("text").value;
+
+    let num = contacts.get(toGet);
+    if(num!=undefined){
+        alert(`Name:${toGet} , Number: ${contacts.get(toGet)}`);
+
+    }
+    else{
+        alert("No results found")
+    }
+}
+
+
+//Feature to be added: Determine who is callling Given their phone number
+
+

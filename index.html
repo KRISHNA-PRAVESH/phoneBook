@@ -10,14 +10,29 @@
 
 <body>
 
-<div class="app">
-	<div class="input-container">
-		<input type="text" name="text" id="text" placeholder="Type Here" autocomplete="off">
-		<span class="suggestion-container"></span>
-		<div class="icons-container">
-		</div>
-	</div>
-</div>
+   <!-- Add to contacts Button -->
+    <div class="add-btn" style="margin-right:25px ;">
+         <button onclick="addContact()">ADD</button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="app">
+        <div class="input-container">
+            <input type="text"  name="text" id="text" placeholder="Type Here" autocomplete="off">
+            <span class="suggestion-container"></span>
+            <div class="icons-container">
+            </div>
+        </div>
+    </div>
+
+    <!-- Get number of selected contact button -->
+    <div class="get-btn">
+        <button onclick="Get()">Get</button>
+    </div>
+
+
+
+
 
 <!-- <svg class="icons">
 	<symbol id="tab-key" viewBox="0 0 448 448">
