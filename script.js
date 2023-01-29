@@ -5,6 +5,7 @@ function addContact(){
 	let number = prompt("Enter Number");
 	//Saving contact to the map.
 	contacts.set(name,number);
+	alert("Contact saved.")
 
 	//adding contact name to the suggestions
 	contactNames.push(name);
@@ -19,7 +20,7 @@ const suggestion = document.querySelector(".suggestion-container");
 //Ascii values
 const ENTER_KEYCODE = 13;
 const TAB_KEYCODE = 9;
-const BACKSPACE_KEYCODE = 8;
+const BACKSPACE_KEYCODE = 8
 const UP_ARROW_KEYCODE = 38;
 const DOWN_ARROW_KEYCODE = 40;
 const SPACE_KEYCODE = 32;
