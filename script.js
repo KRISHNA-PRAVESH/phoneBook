@@ -3,16 +3,18 @@ const contacts = new Map();
 function addContact(){
 	let name = prompt("Enter name");
 	let number = prompt("Enter Number");
-	//Saving contact to the map.
-	contacts.set(name,number);
-	alert("Contact saved.")
+	if(name!=null && number!=null){
+		//Saving contact to the map.
+		contacts.set(name,number);
+		alert("Contact saved.")
 
-	//adding contact name to the suggestions
-	contactNames.push(name);
+		//adding contact name to the suggestions
+		contactNames.push(name);
+	}
+
 }
 
 //Picking elements in the HTML
-const inputContainer = document.querySelector(".input-container");
 const textInput = document.querySelector("input#text");
 const suggestion = document.querySelector(".suggestion-container");
 
@@ -23,7 +25,7 @@ const TAB_KEYCODE = 9;
 const BACKSPACE_KEYCODE = 8
 const UP_ARROW_KEYCODE = 38;
 const DOWN_ARROW_KEYCODE = 40;
-const SPACE_KEYCODE = 32;
+
 
 
 //contains all the contact names
@@ -157,6 +159,20 @@ function Get(){
 }
 
 
-//Feature to be added: Determine who is calling Given their phone number
+// Determine who is calling Given their phone number
+function getByValue(map,value){
+	//looping through the map
+	for(let[key,val] of map.entries()){
+		if(val==value) return key;
+	}
+	return "Contact Not found";
+}
+
+function whoIsCalling(){
+   let num = prompt("Enter Number");
+   alert(getByValue(contacts,num));
+
+}
+
 
 
